@@ -14,6 +14,10 @@ __Optimization__: Designed the system for high throughput and scalability, optim
 
 This project demonstrates proficiency in building real-time data pipelines, implementing custom TF-IDF pipelines, and managing NoSQL databases, providing actionable insights and enhancing data-driven decision-making.
 
+__NOTE:__
+
+THE JSON FILE UNDER THE DATA FOLDER IS UPDATED EVERY 30 MINUTES AS THE news.py CONTINUOUSLY SCRAPES HOT HEADLINES USING THE 3 APIS, NEWSAPI,INSHORTS AND WEBSEARCHER WHILE THE PRODUCER.PY ALSO CONTINUOUSLY RUNS, READING THE JSON FILE, PRODUCING IT TO THE TOPIC, AND CLEARING THE JSON FILE.
+
 ## SCREENSHOTS
 ![image](https://github.com/user-attachments/assets/6626bf40-3d62-408c-8a0e-ec72f85df34f)
 
