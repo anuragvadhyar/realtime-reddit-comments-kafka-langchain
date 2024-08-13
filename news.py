@@ -3,7 +3,7 @@ import time
 import json
 from bs4 import BeautifulSoup
 from datetime import datetime
-api_key = '1e211e09d62142d2b667f7948c73f221'
+api_key = 'INSERT YOUR KEY'
 url = f'https://newsapi.org/v2/top-headlines?country=in&apiKey={api_key}'
 news_data = []
 def get_from_news_api():
@@ -89,7 +89,7 @@ def indianewslive():
     querystring = {"limit":"50","country":"IN","lang":"en"}
 
     headers = {
-        "x-rapidapi-key": "4f9e5b33a9msh0aa163f9011c0e7p1ac54fjsn199c162d3f7b",
+        "x-rapidapi-key": "INSERT YOUR KEY",
         "x-rapidapi-host": "real-time-news-data.p.rapidapi.com"
     }
 
