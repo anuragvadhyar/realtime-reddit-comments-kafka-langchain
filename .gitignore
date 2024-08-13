@@ -1,0 +1,11 @@
+twitter_news.json
+test.py
+test2.py
+topictest.py
+env/
+venv/
+__pycache__
+twitter.py
+consumer.py
+sparktest.py
+trending_topics.json
