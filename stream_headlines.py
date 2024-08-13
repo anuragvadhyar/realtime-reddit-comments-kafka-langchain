@@ -17,7 +17,7 @@ import time
 from preprocessing import preprocessing
 from tfidf import Tfidf_Pipeline
 
-kafka_topic_name = "test"
+kafka_topic_name = "trending"
 kafka_bootstrap_servers = 'localhost:9092'
 
 def find_similarity(data):
@@ -116,12 +116,12 @@ def find_similiar_headlines(df):
     final_df.write\
         .format("mongo")\
         .mode("append")\
-        .option("uri", "mongodb://localhost:27017/TrendingNewsDatabase.Headlines")\
+        .option("uri", "mongodb://localhost:27017/NewsDB.Hot")\
         .save()
     
-    print("\n\n=====================================================================")
-    print("###############  Headlines stored in Mongo Database #################")
-    print("=====================================================================\n\n")
+    
+    print("SUCCESSFULLY STORED IN DATABASE")
+    
     return final_df
 
 
@@ -130,27 +130,25 @@ if __name__ == "__main__":
     spark = SparkSession.builder\
     .appName("PySpark Structured Streaming with Kafka for headlines")\
     .master("local[*]")\
-    .config("spark.mongodb.output.uri", "mongodb://localhost:27017/TrendingNewsDatabase.Headlines")\
+    .config("spark.mongodb.output.uri", "mongodb://localhost:27017/NewsDB.Hot")\
     .getOrCreate()
 
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
-    print("\n\n=====================================================================")
-    print("#########  Stream Headlines Processing Application Started ##########")
-    print("=====================================================================\n\n")
+    
+    print("CONSUMING FROM TOPIC"+ kafka_topic_name)
+    
     
     spark.sparkContext.setLogLevel("ERROR")
 
-    ############################  TF-IDF PIPELINE  ###############################
 
     light_pipeline = Tfidf_Pipeline(spark)
 
-    ##############  streaming DataFrame for headlines from newsapi, websearch api and inshorts  #############
 
     headlines_df = spark.readStream\
         .format("kafka")\
         .option("kafka.bootstrap.servers", kafka_bootstrap_servers)\
-        .option("subscribe", "test")\
+        .option("subscribe", kafka_topic_name)\
         .option("startingOffsets", "latest")\
         .option("maxOffsetsPerTrigger",500)\
         .load()
@@ -172,9 +170,7 @@ if __name__ == "__main__":
 
     final_df = preprocessing(headlines_df4)
 
-    #################### Write final result into console for debugging purpose  ##########################
 
-    #headlines_path = PROCESSING_DIR.joinpath('headlines')
     
     query_headlines = final_df \
         .writeStream.trigger(processingTime='10 seconds')\
@@ -185,7 +181,3 @@ if __name__ == "__main__":
         .start()
     
     spark.streams.awaitAnyTermination()
-
-    print("\n\n=====================================================================")
-    print("Stream Headlines Processing Application Completed.")
-    print("=====================================================================\n\n")
