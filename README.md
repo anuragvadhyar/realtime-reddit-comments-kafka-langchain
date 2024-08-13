@@ -14,7 +14,7 @@ __Optimization__: Designed the system for high throughput and scalability, optim
 
 This project demonstrates proficiency in building real-time data pipelines, implementing custom TF-IDF pipelines, and managing NoSQL databases, providing actionable insights and enhancing data-driven decision-making.
 
-## IMAGES OF EXECUTION
+## SCREENSHOTS
 ![image](https://github.com/user-attachments/assets/6626bf40-3d62-408c-8a0e-ec72f85df34f)
 
 
@@ -33,5 +33,8 @@ This project demonstrates proficiency in building real-time data pipelines, impl
 ![image](https://github.com/user-attachments/assets/6e4e1421-7468-440e-92bb-8e01748bd825)
 
 
+### FUTURE WORK
+
+In subsequent iterations, I would like to use TF-IDF to store trending terms in the database rather than trending headlines, akin to Twitter's trending page.
 
 
